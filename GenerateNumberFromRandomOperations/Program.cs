@@ -1,10 +1,11 @@
-﻿using System.Text;
+﻿using System.Data;
+using System.Text;
 
 namespace GenerateNumberFromRandomOperations
 {
     public class Program
     {
-        const int MAX_TIMES = 5000;
+        const int MAX_TIMES = 1000000;
         const int MIN_VALUE = 0;
         const int MAX_VALUE = 100;
         static void Main()
@@ -41,7 +42,7 @@ namespace GenerateNumberFromRandomOperations
 
         static string GenerateNumericalExpression(int num, int amount)
         {
-            string[] operators = { "+", "-", "*" };
+            string[] operators = { "+", "-", "*", "/" };
             int[] randomNums = GenerateSetOfRandomNumbers(amount);
             StringBuilder sb = new();
             Random random = new Random();
@@ -51,7 +52,7 @@ namespace GenerateNumberFromRandomOperations
                 sb.Append(randomNums[i]);
                 if (i < amount - 1)
                 {
-                    sb.Append(operators[random.Next(0, 3)]);
+                    sb.Append(operators[random.Next(0, 4)]);
                 }
             }
             return sb.ToString();
@@ -59,7 +60,7 @@ namespace GenerateNumberFromRandomOperations
 
         static double Evaluate(String expression)
         {
-            System.Data.DataTable dt = new System.Data.DataTable();
+            DataTable dt = new();
             try
             {
                 return Convert.ToDouble(dt.Compute(expression, String.Empty));
